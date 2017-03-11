@@ -154,8 +154,8 @@ namespace SwipeGridWPF
 						   {
 							   c.FirstName,
 							   c.SecondName,
-							   Source = c.City,
-							   Destination = c.City1,
+							   Source = c.City.Name,
+							   Destination = c.City1.Name,
 							   c.Date1,
 							   c.Date2,
 							   c.Class,
