@@ -1,0 +1,51 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SwipeGridWPF"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Name="FirstGrid" x:Class="SwipeGridWPF.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+	<Grid Margin="0,0,0.083,0.067">
+		<Grid x:Name="gridFirst" Margin="0,0,-0.083,-0.067">
+			<Grid.Background>
+				<ImageBrush ImageSource="C:\Users\campus\Desktop\genesis.jpg"/>
+			</Grid.Background>
+			<Button x:Name="btnNext" Content="Next" HorizontalAlignment="Right" Margin="0,0,38.083,146.067" Width="75" Click="btnNext_Click" Height="20" VerticalAlignment="Bottom"/>
+			<ComboBox x:Name="comboBoxSource" Margin="119.5,10,236.417,0" VerticalAlignment="Top" Height="23.96"/>
+			<ComboBox x:Name="comboBoxDestination" Margin="119.5,40.367,236.417,0" VerticalAlignment="Top" Height="21.553"/>
+			<Label x:Name="lblSource" Content="Место вылета:" HorizontalAlignment="Left" Margin="17.5,6,0,0" VerticalAlignment="Top" Height="27.96" FontWeight="Bold" FontFamily="Times New Roman" Background="{x:Null}" Foreground="#FFEEE9E9"/>
+			<Label x:Name="lblSource_Copy" Content="Место прилета:" HorizontalAlignment="Left" Margin="17.5,33.96,0,0" VerticalAlignment="Top" Height="27.96" FontWeight="Bold" FontFamily="Times New Roman" Background="{x:Null}" Foreground="#FFEEE9E9"/>
+			<DatePicker x:Name="dateDeparture" HorizontalAlignment="Right" Margin="0,10,71.083,0" VerticalAlignment="Top" Text="Дата вылета" FirstDayOfWeek="Monday" Height="24" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="#FF333333"/>
+			<DatePicker x:Name="dateArrival" HorizontalAlignment="Right" Margin="0,40,71.083,0" VerticalAlignment="Top" Visibility="Visible"/>
+			<TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="22.268" Margin="119.5,101.683,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+			<StackPanel HorizontalAlignment="Right" Margin="0,75.988,86.953,0" Orientation="Vertical" VerticalAlignment="Top" Width="125.464" Height="61.044">
+				<RadioButton x:Name="rbTo" Content="Туда" RenderTransformOrigin="-0.173,-0.685" Foreground="#FFF5EFEF" FontWeight="Bold" Checked="rbTo_Checked" IsChecked="True" Margin="40,0,-40,0"/>
+				<RadioButton x:Name="rbToAndFrom" Content="Туда - Обратно" RenderTransformOrigin="-0.173,-0.685" Foreground="#FFF5EFEF" FontWeight="Bold" Height="17" Width="97" HorizontalAlignment="Left" Checked="rbToAndFrom_Checked" Margin="40,0,-12,0"/>
+			</StackPanel>
+			<Label x:Name="lblSource_Copy2" Content="Класс места:" HorizontalAlignment="Left" Margin="17.5,65.309,0,0" VerticalAlignment="Top" Height="27.96" FontWeight="Bold" FontFamily="Times New Roman" Background="{x:Null}" Foreground="#FFEEE9E9"/>
+			<ComboBox x:Name="comboBoxClass" Margin="119,70,236.083,0" VerticalAlignment="Top" Height="23"/>
+			<Label x:Name="lblSource_Copy1" Content="Цена:" HorizontalAlignment="Left" Margin="17.5,95.991,0,0" VerticalAlignment="Top" Height="27.96" FontWeight="Bold" FontFamily="Times New Roman" Background="{x:Null}" Foreground="#FFEEE9E9"/>
+			<ListBox x:Name="listBoxPrice" Margin="180.5,101.683,236.083,0" Height="29.601" VerticalAlignment="Top"/>
+			<Button x:Name="btnInsert" Content="Insert" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="75" Click="btnInsert_Click"/>
+			<DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Margin="88,178,0,0" VerticalAlignment="Top" Height="131" Width="419"/>
+		</Grid>
+		<Grid x:Name="gridSecond" Visibility="Hidden">
+			<Grid.Background>
+				<ImageBrush ImageSource="C:\Users\campus\Desktop\кот-1.jpg"/>
+			</Grid.Background>
+			<Button x:Name="btnPrev" Content="Previous" HorizontalAlignment="Left" Margin="20,0,0,150.973" Width="75" Click="btnPrev_Click" VerticalAlignment="Bottom"/>
+			<GroupBox x:Name="groupBoxInfoBilet" Header="Данные полета" Margin="10,10,22.887,0" VerticalAlignment="Top" Height="114.293" Foreground="#FFEEDBDB" BorderBrush="#FF878B8D" FontFamily="Times New Roman"/>
+			<Label x:Name="label" Content="Имя:" Margin="20,0,458.92,94.971" VerticalAlignment="Bottom" Foreground="#FFF5EDED" FontFamily="Times New Roman" FontWeight="Bold" d:LayoutOverrides="Width"/>
+			<TextBox x:Name="txtFirstName" HorizontalAlignment="Left" Height="17.667" Margin="95.345,0,0,98.639" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+			<Label x:Name="label_Copy" Content="Фамилия:" HorizontalAlignment="Left" Margin="20,0,0,69.839" VerticalAlignment="Bottom" Foreground="#FFF5EDED" FontFamily="Times New Roman" FontWeight="Bold" RenderTransformOrigin="0.491,-0.4"/>
+			<TextBox x:Name="txtSecondName" HorizontalAlignment="Left" Height="17.667" Margin="95.345,0,0,72.756" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+			<Label x:Name="label_Copy1" Content="IDNO:" Margin="0,0,209.095,94.971" VerticalAlignment="Bottom" Foreground="#FFF5EDED" FontFamily="Times New Roman" FontWeight="Bold" HorizontalAlignment="Right"/>
+			<TextBox x:Name="txtIDNO" Height="17.667" Margin="0,0,51.447,98.639" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120"/>
+			<Label x:Name="label_Copy2" Content="Серия паспорта:" Margin="0,0,181.521,69.839" VerticalAlignment="Bottom" Foreground="#FFF5EDED" FontFamily="Times New Roman" FontWeight="Bold" RenderTransformOrigin="0.491,-0.4" HorizontalAlignment="Right"/>
+			<TextBox x:Name="txtSeriesPasport" Height="17.667" Margin="0,0,51.447,71.959" TextWrapping="Wrap" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120"/>
+			<Button x:Name="btnSale" Content="Сделать зказ" HorizontalAlignment="Right" Margin="0,0,51.447,24.666" VerticalAlignment="Bottom" Width="95.333" FontFamily="Times New Roman" FontWeight="Bold" Foreground="#FFF0E2E2" Background="#FF9B9393" Click="btnSale_Click"/>
+		</Grid>
+	</Grid>
+</Window>
