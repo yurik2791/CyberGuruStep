@@ -10,7 +10,7 @@
 	<Grid Margin="0,0,0.083,0.067">
 		<Grid x:Name="gridFirst" Margin="0,0,-0.083,-0.067">
 			<Grid.Background>
-				<ImageBrush ImageSource="C:\Users\campus\Desktop\genesis.jpg"/>
+                <ImageBrush ImageSource="C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\image-f39d4e40-980x550.jpg"/>
 			</Grid.Background>
 			<Button x:Name="btnNext" Content="Next" HorizontalAlignment="Right" Margin="0,0,38.083,146.067" Width="75" Click="btnNext_Click" Height="20" VerticalAlignment="Bottom"/>
 			<ComboBox x:Name="comboBoxSource" Margin="119.5,10,236.417,0" VerticalAlignment="Top" Height="23.96"/>
@@ -33,7 +33,7 @@
 		</Grid>
 		<Grid x:Name="gridSecond" Visibility="Hidden">
 			<Grid.Background>
-				<ImageBrush ImageSource="C:\Users\campus\Desktop\кот-1.jpg"/>
+                <ImageBrush ImageSource="C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\image-f39d4e40-980x550.jpg"/>
 			</Grid.Background>
 			<Button x:Name="btnPrev" Content="Previous" HorizontalAlignment="Left" Margin="20,0,0,150.973" Width="75" Click="btnPrev_Click" VerticalAlignment="Bottom"/>
 			<GroupBox x:Name="groupBoxInfoBilet" Header="Данные полета" Margin="10,10,22.887,0" VerticalAlignment="Top" Height="114.293" Foreground="#FFEEDBDB" BorderBrush="#FF878B8D" FontFamily="Times New Roman"/>

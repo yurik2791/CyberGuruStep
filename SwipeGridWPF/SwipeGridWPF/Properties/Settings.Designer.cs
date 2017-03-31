@@ -33,5 +33,15 @@ namespace SwipeGridWPF.Properties {
                 return ((string)(this["StepAirwaysConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=WIN-8BITCTE92IS;Initial Catalog=AirLines;Integrated Security=True")]
+        public string AirLinesConnectionString {
+            get {
+                return ((string)(this["AirLinesConnectionString"]));
+            }
+        }
     }
 }

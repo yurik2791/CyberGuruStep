@@ -40,3 +40,17 @@ D:\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\MainWindow.baml
 D:\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.g.resources
 D:\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.Properties.Resources.resources
 D:\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.csproj.GenerateResource.Cache
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\bin\Debug\SwipeGridWPF.exe.config
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.exe
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.pdb
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\bin\Debug\SwipeGridWPF.exe
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\bin\Debug\SwipeGridWPF.pdb
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.csprojResolveAssemblyReference.cache
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\MainWindow.g.cs
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\App.g.cs
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF_MarkupCompile.cache
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF_MarkupCompile.lref
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\MainWindow.baml
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.g.resources
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.Properties.Resources.resources
+C:\Users\Yurka\Source\Repos\CyberGuruStep\SwipeGridWPF\SwipeGridWPF\obj\Debug\SwipeGridWPF.csproj.GenerateResource.Cache

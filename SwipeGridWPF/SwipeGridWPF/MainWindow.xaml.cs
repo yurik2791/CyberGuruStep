@@ -152,15 +152,16 @@ namespace SwipeGridWPF
 				var res = (from c in dataContext.Tickets
 						   select new
 						   {
+                               
 							   c.FirstName,
 							   c.SecondName,
-							   Source = c.City.Name,
-							   Destination = c.City1.Name,
-							   c.Date1,
-							   c.Date2,
+							   Source = c.City.City1,
+							   Destination = c.City1.City1,
+							   c.DateDeparture,
+							   c.DateArrival,
 							   c.Class,
 							   c.Price,
-						   }).ToList();
+						   });
 
 				dataGrid.Dispatcher.Invoke(() => { dataGrid.ItemsSource = res; });
 			}).Start();
@@ -174,20 +175,22 @@ namespace SwipeGridWPF
 			{
 				var constr = ConfigurationManager.ConnectionStrings["constr"].ToString();
 				var dataContext = new TicketDataContext(constr);
-				var newTicket = new Bilet()
+				var newTicket = new Ticket
 				{
+                    
 					Id = Guid.NewGuid(),
 					FirstName = txtFirstName.Text,
-					LastName = txtSecondName.Text,
-					Source = (from c in dataContext.Gorods where c.CityName == comboBoxSource.Text select c.Id).First(),
-					Destination = (from c in dataContext.Gorods where c.CityName == comboBoxDestination.Text select c.Id).First(),
+					SecondName = txtSecondName.Text,
+					Source = (from c in dataContext.Cities where c.City1 == comboBoxSource.Text select c.Id).First(),
+					Destination = (from c in dataContext.Cities where c.City1 == comboBoxDestination.Text select c.Id).First(),
 					Class = comboBoxClass.Text,
-					DateOne = (DateTime) dateDeparture.SelectedDate,
-					DateTwo = (DateTime) dateArrival.SelectedDate,
+					DateDeparture = (DateTime) dateDeparture.SelectedDate,
+					DateArrival = dateArrival.SelectedDate,
 					Way = rbTo.IsChecked == true ? (byte)0 : (byte)1,
-					Price = decimal.Parse(txtPrice.Text, CultureInfo.InvariantCulture)
+					Price = decimal.Parse(txtPrice.Text, CultureInfo.InvariantCulture),
+                    //Currency = listBoxPrice.SelectedItem.ToString()
 				};
-				dataContext.Bilets.InsertOnSubmit(newTicket);
+				dataContext.Tickets.InsertOnSubmit(newTicket);
 				dataContext.SubmitChanges();
 			});
 

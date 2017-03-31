@@ -22,7 +22,7 @@ namespace SwipeGridWPF
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="StepAirways")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="AirLines")]
 	public partial class TicketDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,22 +30,16 @@ namespace SwipeGridWPF
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertTicket(Ticket instance);
-    partial void UpdateTicket(Ticket instance);
-    partial void DeleteTicket(Ticket instance);
-    partial void InsertBilet(Bilet instance);
-    partial void UpdateBilet(Bilet instance);
-    partial void DeleteBilet(Bilet instance);
     partial void InsertCity(City instance);
     partial void UpdateCity(City instance);
     partial void DeleteCity(City instance);
-    partial void InsertGorod(Gorod instance);
-    partial void UpdateGorod(Gorod instance);
-    partial void DeleteGorod(Gorod instance);
+    partial void InsertTicket(Ticket instance);
+    partial void UpdateTicket(Ticket instance);
+    partial void DeleteTicket(Ticket instance);
     #endregion
 		
 		public TicketDataContext() : 
-				base(global::SwipeGridWPF.Properties.Settings.Default.StepAirwaysConnectionString, mappingSource)
+				base(global::SwipeGridWPF.Properties.Settings.Default.AirLinesConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -74,22 +68,6 @@ namespace SwipeGridWPF
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Ticket> Tickets
-		{
-			get
-			{
-				return this.GetTable<Ticket>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Bilet> Bilets
-		{
-			get
-			{
-				return this.GetTable<Bilet>();
-			}
-		}
-		
 		public System.Data.Linq.Table<City> Cities
 		{
 			get
@@ -98,12 +76,154 @@ namespace SwipeGridWPF
 			}
 		}
 		
-		public System.Data.Linq.Table<Gorod> Gorods
+		public System.Data.Linq.Table<Ticket> Tickets
 		{
 			get
 			{
-				return this.GetTable<Gorod>();
+				return this.GetTable<Ticket>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.City")]
+	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private string _City1;
+		
+		private EntitySet<Ticket> _Tickets;
+		
+		private EntitySet<Ticket> _Tickets1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnCity1Changing(string value);
+    partial void OnCity1Changed();
+    #endregion
+		
+		public City()
+		{
+			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
+			this._Tickets1 = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets1), new Action<Ticket>(this.detach_Tickets1));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="City", Storage="_City1", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string City1
+		{
+			get
+			{
+				return this._City1;
+			}
+			set
+			{
+				if ((this._City1 != value))
+				{
+					this.OnCity1Changing(value);
+					this.SendPropertyChanging();
+					this._City1 = value;
+					this.SendPropertyChanged("City1");
+					this.OnCity1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="Source")]
+		public EntitySet<Ticket> Tickets
+		{
+			get
+			{
+				return this._Tickets;
+			}
+			set
+			{
+				this._Tickets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket1", Storage="_Tickets1", ThisKey="Id", OtherKey="Destination")]
+		public EntitySet<Ticket> Tickets1
+		{
+			get
+			{
+				return this._Tickets1;
+			}
+			set
+			{
+				this._Tickets1.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Tickets(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = this;
+		}
+		
+		private void detach_Tickets(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.City = null;
+		}
+		
+		private void attach_Tickets1(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.City1 = this;
+		}
+		
+		private void detach_Tickets1(Ticket entity)
+		{
+			this.SendPropertyChanging();
+			entity.City1 = null;
 		}
 	}
 	
@@ -119,19 +239,19 @@ namespace SwipeGridWPF
 		
 		private string _SecondName;
 		
-		private System.Guid _Src;
+		private System.Guid _Source;
 		
-		private System.Guid _Dst;
+		private System.Guid _Destination;
+		
+		private System.DateTime _DateDeparture;
+		
+		private System.Nullable<System.DateTime> _DateArrival;
 		
 		private string _Class;
 		
-		private byte _Way;
-		
-		private System.DateTime _Date1;
-		
-		private System.Nullable<System.DateTime> _Date2;
-		
 		private decimal _Price;
+		
+		private byte _Way;
 		
 		private EntityRef<City> _City;
 		
@@ -147,20 +267,20 @@ namespace SwipeGridWPF
     partial void OnFirstNameChanged();
     partial void OnSecondNameChanging(string value);
     partial void OnSecondNameChanged();
-    partial void OnSrcChanging(System.Guid value);
-    partial void OnSrcChanged();
-    partial void OnDstChanging(System.Guid value);
-    partial void OnDstChanged();
+    partial void OnSourceChanging(System.Guid value);
+    partial void OnSourceChanged();
+    partial void OnDestinationChanging(System.Guid value);
+    partial void OnDestinationChanged();
+    partial void OnDateDepartureChanging(System.DateTime value);
+    partial void OnDateDepartureChanged();
+    partial void OnDateArrivalChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateArrivalChanged();
     partial void OnClassChanging(string value);
     partial void OnClassChanged();
-    partial void OnWayChanging(byte value);
-    partial void OnWayChanged();
-    partial void OnDate1Changing(System.DateTime value);
-    partial void OnDate1Changed();
-    partial void OnDate2Changing(System.Nullable<System.DateTime> value);
-    partial void OnDate2Changed();
     partial void OnPriceChanging(decimal value);
     partial void OnPriceChanged();
+    partial void OnWayChanging(byte value);
+    partial void OnWayChanged();
     #endregion
 		
 		public Ticket()
@@ -230,366 +350,6 @@ namespace SwipeGridWPF
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Src", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid Src
-		{
-			get
-			{
-				return this._Src;
-			}
-			set
-			{
-				if ((this._Src != value))
-				{
-					if (this._City.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSrcChanging(value);
-					this.SendPropertyChanging();
-					this._Src = value;
-					this.SendPropertyChanged("Src");
-					this.OnSrcChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dst", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid Dst
-		{
-			get
-			{
-				return this._Dst;
-			}
-			set
-			{
-				if ((this._Dst != value))
-				{
-					if (this._City1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDstChanging(value);
-					this.SendPropertyChanging();
-					this._Dst = value;
-					this.SendPropertyChanged("Dst");
-					this.OnDstChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Class", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Class
-		{
-			get
-			{
-				return this._Class;
-			}
-			set
-			{
-				if ((this._Class != value))
-				{
-					this.OnClassChanging(value);
-					this.SendPropertyChanging();
-					this._Class = value;
-					this.SendPropertyChanged("Class");
-					this.OnClassChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Way", DbType="TinyInt NOT NULL")]
-		public byte Way
-		{
-			get
-			{
-				return this._Way;
-			}
-			set
-			{
-				if ((this._Way != value))
-				{
-					this.OnWayChanging(value);
-					this.SendPropertyChanging();
-					this._Way = value;
-					this.SendPropertyChanged("Way");
-					this.OnWayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date1", DbType="Date NOT NULL")]
-		public System.DateTime Date1
-		{
-			get
-			{
-				return this._Date1;
-			}
-			set
-			{
-				if ((this._Date1 != value))
-				{
-					this.OnDate1Changing(value);
-					this.SendPropertyChanging();
-					this._Date1 = value;
-					this.SendPropertyChanged("Date1");
-					this.OnDate1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date2", DbType="Date")]
-		public System.Nullable<System.DateTime> Date2
-		{
-			get
-			{
-				return this._Date2;
-			}
-			set
-			{
-				if ((this._Date2 != value))
-				{
-					this.OnDate2Changing(value);
-					this.SendPropertyChanging();
-					this._Date2 = value;
-					this.SendPropertyChanged("Date2");
-					this.OnDate2Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Money NOT NULL")]
-		public decimal Price
-		{
-			get
-			{
-				return this._Price;
-			}
-			set
-			{
-				if ((this._Price != value))
-				{
-					this.OnPriceChanging(value);
-					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket", Storage="_City", ThisKey="Src", OtherKey="Id", IsForeignKey=true)]
-		public City City
-		{
-			get
-			{
-				return this._City.Entity;
-			}
-			set
-			{
-				City previousValue = this._City.Entity;
-				if (((previousValue != value) 
-							|| (this._City.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._City.Entity = null;
-						previousValue.Tickets.Remove(this);
-					}
-					this._City.Entity = value;
-					if ((value != null))
-					{
-						value.Tickets.Add(this);
-						this._Src = value.Id;
-					}
-					else
-					{
-						this._Src = default(System.Guid);
-					}
-					this.SendPropertyChanged("City");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket1", Storage="_City1", ThisKey="Dst", OtherKey="Id", IsForeignKey=true)]
-		public City City1
-		{
-			get
-			{
-				return this._City1.Entity;
-			}
-			set
-			{
-				City previousValue = this._City1.Entity;
-				if (((previousValue != value) 
-							|| (this._City1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._City1.Entity = null;
-						previousValue.Tickets1.Remove(this);
-					}
-					this._City1.Entity = value;
-					if ((value != null))
-					{
-						value.Tickets1.Add(this);
-						this._Dst = value.Id;
-					}
-					else
-					{
-						this._Dst = default(System.Guid);
-					}
-					this.SendPropertyChanged("City1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Bilet")]
-	public partial class Bilet : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _Id;
-		
-		private string _FirstName;
-		
-		private string _LastName;
-		
-		private System.Guid _Source;
-		
-		private System.Guid _Destination;
-		
-		private string _Class;
-		
-		private byte _Way;
-		
-		private System.DateTime _DateOne;
-		
-		private System.DateTime _DateTwo;
-		
-		private decimal _Price;
-		
-		private EntityRef<Gorod> _Gorod;
-		
-		private EntityRef<Gorod> _Gorod1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(System.Guid value);
-    partial void OnIdChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnSourceChanging(System.Guid value);
-    partial void OnSourceChanged();
-    partial void OnDestinationChanging(System.Guid value);
-    partial void OnDestinationChanged();
-    partial void OnClassChanging(string value);
-    partial void OnClassChanged();
-    partial void OnWayChanging(byte value);
-    partial void OnWayChanged();
-    partial void OnDateOneChanging(System.DateTime value);
-    partial void OnDateOneChanged();
-    partial void OnDateTwoChanging(System.DateTime value);
-    partial void OnDateTwoChanged();
-    partial void OnPriceChanging(decimal value);
-    partial void OnPriceChanged();
-    #endregion
-		
-		public Bilet()
-		{
-			this._Gorod = default(EntityRef<Gorod>);
-			this._Gorod1 = default(EntityRef<Gorod>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string FirstName
-		{
-			get
-			{
-				return this._FirstName;
-			}
-			set
-			{
-				if ((this._FirstName != value))
-				{
-					this.OnFirstNameChanging(value);
-					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string LastName
-		{
-			get
-			{
-				return this._LastName;
-			}
-			set
-			{
-				if ((this._LastName != value))
-				{
-					this.OnLastNameChanging(value);
-					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Source", DbType="UniqueIdentifier NOT NULL")]
 		public System.Guid Source
 		{
@@ -601,7 +361,7 @@ namespace SwipeGridWPF
 			{
 				if ((this._Source != value))
 				{
-					if (this._Gorod.HasLoadedOrAssignedValue)
+					if (this._City.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -625,7 +385,7 @@ namespace SwipeGridWPF
 			{
 				if ((this._Destination != value))
 				{
-					if (this._Gorod1.HasLoadedOrAssignedValue)
+					if (this._City1.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -634,6 +394,46 @@ namespace SwipeGridWPF
 					this._Destination = value;
 					this.SendPropertyChanged("Destination");
 					this.OnDestinationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateDeparture", DbType="DateTime NOT NULL")]
+		public System.DateTime DateDeparture
+		{
+			get
+			{
+				return this._DateDeparture;
+			}
+			set
+			{
+				if ((this._DateDeparture != value))
+				{
+					this.OnDateDepartureChanging(value);
+					this.SendPropertyChanging();
+					this._DateDeparture = value;
+					this.SendPropertyChanged("DateDeparture");
+					this.OnDateDepartureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateArrival", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateArrival
+		{
+			get
+			{
+				return this._DateArrival;
+			}
+			set
+			{
+				if ((this._DateArrival != value))
+				{
+					this.OnDateArrivalChanging(value);
+					this.SendPropertyChanging();
+					this._DateArrival = value;
+					this.SendPropertyChanged("DateArrival");
+					this.OnDateArrivalChanged();
 				}
 			}
 		}
@@ -658,66 +458,6 @@ namespace SwipeGridWPF
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Way", DbType="TinyInt NOT NULL")]
-		public byte Way
-		{
-			get
-			{
-				return this._Way;
-			}
-			set
-			{
-				if ((this._Way != value))
-				{
-					this.OnWayChanging(value);
-					this.SendPropertyChanging();
-					this._Way = value;
-					this.SendPropertyChanged("Way");
-					this.OnWayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOne", DbType="DateTime NOT NULL")]
-		public System.DateTime DateOne
-		{
-			get
-			{
-				return this._DateOne;
-			}
-			set
-			{
-				if ((this._DateOne != value))
-				{
-					this.OnDateOneChanging(value);
-					this.SendPropertyChanging();
-					this._DateOne = value;
-					this.SendPropertyChanged("DateOne");
-					this.OnDateOneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTwo", DbType="DateTime NOT NULL")]
-		public System.DateTime DateTwo
-		{
-			get
-			{
-				return this._DateTwo;
-			}
-			set
-			{
-				if ((this._DateTwo != value))
-				{
-					this.OnDateTwoChanging(value);
-					this.SendPropertyChanging();
-					this._DateTwo = value;
-					this.SendPropertyChanged("DateTwo");
-					this.OnDateTwoChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Money NOT NULL")]
 		public decimal Price
 		{
@@ -738,70 +478,90 @@ namespace SwipeGridWPF
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gorod_Bilet", Storage="_Gorod", ThisKey="Source", OtherKey="Id", IsForeignKey=true)]
-		public Gorod Gorod
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Way", DbType="TinyInt NOT NULL")]
+		public byte Way
 		{
 			get
 			{
-				return this._Gorod.Entity;
+				return this._Way;
 			}
 			set
 			{
-				Gorod previousValue = this._Gorod.Entity;
+				if ((this._Way != value))
+				{
+					this.OnWayChanging(value);
+					this.SendPropertyChanging();
+					this._Way = value;
+					this.SendPropertyChanged("Way");
+					this.OnWayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket", Storage="_City", ThisKey="Source", OtherKey="Id", IsForeignKey=true)]
+		public City City
+		{
+			get
+			{
+				return this._City.Entity;
+			}
+			set
+			{
+				City previousValue = this._City.Entity;
 				if (((previousValue != value) 
-							|| (this._Gorod.HasLoadedOrAssignedValue == false)))
+							|| (this._City.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Gorod.Entity = null;
-						previousValue.Bilets.Remove(this);
+						this._City.Entity = null;
+						previousValue.Tickets.Remove(this);
 					}
-					this._Gorod.Entity = value;
+					this._City.Entity = value;
 					if ((value != null))
 					{
-						value.Bilets.Add(this);
+						value.Tickets.Add(this);
 						this._Source = value.Id;
 					}
 					else
 					{
 						this._Source = default(System.Guid);
 					}
-					this.SendPropertyChanged("Gorod");
+					this.SendPropertyChanged("City");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gorod_Bilet1", Storage="_Gorod1", ThisKey="Destination", OtherKey="Id", IsForeignKey=true)]
-		public Gorod Gorod1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket1", Storage="_City1", ThisKey="Destination", OtherKey="Id", IsForeignKey=true)]
+		public City City1
 		{
 			get
 			{
-				return this._Gorod1.Entity;
+				return this._City1.Entity;
 			}
 			set
 			{
-				Gorod previousValue = this._Gorod1.Entity;
+				City previousValue = this._City1.Entity;
 				if (((previousValue != value) 
-							|| (this._Gorod1.HasLoadedOrAssignedValue == false)))
+							|| (this._City1.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Gorod1.Entity = null;
-						previousValue.Bilets1.Remove(this);
+						this._City1.Entity = null;
+						previousValue.Tickets1.Remove(this);
 					}
-					this._Gorod1.Entity = value;
+					this._City1.Entity = value;
 					if ((value != null))
 					{
-						value.Bilets1.Add(this);
+						value.Tickets1.Add(this);
 						this._Destination = value.Id;
 					}
 					else
 					{
 						this._Destination = default(System.Guid);
 					}
-					this.SendPropertyChanged("Gorod1");
+					this.SendPropertyChanged("City1");
 				}
 			}
 		}
@@ -824,290 +584,6 @@ namespace SwipeGridWPF
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.City")]
-	public partial class City : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _Id;
-		
-		private string _Name;
-		
-		private EntitySet<Ticket> _Tickets;
-		
-		private EntitySet<Ticket> _Tickets1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(System.Guid value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public City()
-		{
-			this._Tickets = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets), new Action<Ticket>(this.detach_Tickets));
-			this._Tickets1 = new EntitySet<Ticket>(new Action<Ticket>(this.attach_Tickets1), new Action<Ticket>(this.detach_Tickets1));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket", Storage="_Tickets", ThisKey="Id", OtherKey="Src")]
-		public EntitySet<Ticket> Tickets
-		{
-			get
-			{
-				return this._Tickets;
-			}
-			set
-			{
-				this._Tickets.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="City_Ticket1", Storage="_Tickets1", ThisKey="Id", OtherKey="Dst")]
-		public EntitySet<Ticket> Tickets1
-		{
-			get
-			{
-				return this._Tickets1;
-			}
-			set
-			{
-				this._Tickets1.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = this;
-		}
-		
-		private void detach_Tickets(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.City = null;
-		}
-		
-		private void attach_Tickets1(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.City1 = this;
-		}
-		
-		private void detach_Tickets1(Ticket entity)
-		{
-			this.SendPropertyChanging();
-			entity.City1 = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Gorod")]
-	public partial class Gorod : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _Id;
-		
-		private string _CityName;
-		
-		private EntitySet<Bilet> _Bilets;
-		
-		private EntitySet<Bilet> _Bilets1;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(System.Guid value);
-    partial void OnIdChanged();
-    partial void OnCityNameChanging(string value);
-    partial void OnCityNameChanged();
-    #endregion
-		
-		public Gorod()
-		{
-			this._Bilets = new EntitySet<Bilet>(new Action<Bilet>(this.attach_Bilets), new Action<Bilet>(this.detach_Bilets));
-			this._Bilets1 = new EntitySet<Bilet>(new Action<Bilet>(this.attach_Bilets1), new Action<Bilet>(this.detach_Bilets1));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CityName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string CityName
-		{
-			get
-			{
-				return this._CityName;
-			}
-			set
-			{
-				if ((this._CityName != value))
-				{
-					this.OnCityNameChanging(value);
-					this.SendPropertyChanging();
-					this._CityName = value;
-					this.SendPropertyChanged("CityName");
-					this.OnCityNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gorod_Bilet", Storage="_Bilets", ThisKey="Id", OtherKey="Source")]
-		public EntitySet<Bilet> Bilets
-		{
-			get
-			{
-				return this._Bilets;
-			}
-			set
-			{
-				this._Bilets.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Gorod_Bilet1", Storage="_Bilets1", ThisKey="Id", OtherKey="Destination")]
-		public EntitySet<Bilet> Bilets1
-		{
-			get
-			{
-				return this._Bilets1;
-			}
-			set
-			{
-				this._Bilets1.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Bilets(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gorod = this;
-		}
-		
-		private void detach_Bilets(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gorod = null;
-		}
-		
-		private void attach_Bilets1(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gorod1 = this;
-		}
-		
-		private void detach_Bilets1(Bilet entity)
-		{
-			this.SendPropertyChanging();
-			entity.Gorod1 = null;
 		}
 	}
 }

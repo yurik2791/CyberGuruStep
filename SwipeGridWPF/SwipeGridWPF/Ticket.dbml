@@ -1,51 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="StepAirways" Class="TicketDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=S319P\SQLEXPRESS;Initial Catalog=StepAirways;Persist Security Info=True;User ID=Iurie" SettingsObjectName="SwipeGridWPF.Properties.Settings" SettingsPropertyName="StepAirwaysConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AirLines" Class="TicketDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WIN-8BITCTE92IS;Initial Catalog=AirLines;Integrated Security=True" SettingsObjectName="SwipeGridWPF.Properties.Settings" SettingsPropertyName="AirLinesConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.City" Member="Cities">
+    <Type Name="City">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="City" Member="City1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="City_Ticket" Member="Tickets" ThisKey="Id" OtherKey="Source" Type="Ticket" />
+      <Association Name="City_Ticket1" Member="Tickets1" ThisKey="Id" OtherKey="Destination" Type="Ticket" />
+    </Type>
+  </Table>
   <Table Name="dbo.Ticket" Member="Tickets">
     <Type Name="Ticket">
       <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="SecondName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Src" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="Dst" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="Class" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Way" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="Date1" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Date2" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Association Name="City_Ticket" Member="City" ThisKey="Src" OtherKey="Id" Type="City" IsForeignKey="true" />
-      <Association Name="City_Ticket1" Member="City1" ThisKey="Dst" OtherKey="Id" Type="City" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Bilet" Member="Bilets">
-    <Type Name="Bilet">
-      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Source" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="Destination" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DateDeparture" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateArrival" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Class" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Way" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
-      <Column Name="DateOne" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="DateTwo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Price" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
-      <Association Name="Gorod_Bilet" Member="Gorod" ThisKey="Source" OtherKey="Id" Type="Gorod" IsForeignKey="true" />
-      <Association Name="Gorod_Bilet1" Member="Gorod1" ThisKey="Destination" OtherKey="Id" Type="Gorod" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.City" Member="Cities">
-    <Type Name="City">
-      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="City_Ticket" Member="Tickets" ThisKey="Id" OtherKey="Src" Type="Ticket" />
-      <Association Name="City_Ticket1" Member="Tickets1" ThisKey="Id" OtherKey="Dst" Type="Ticket" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Gorod" Member="Gorods">
-    <Type Name="Gorod">
-      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="CityName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Gorod_Bilet" Member="Bilets" ThisKey="Id" OtherKey="Source" Type="Bilet" />
-      <Association Name="Gorod_Bilet1" Member="Bilets1" ThisKey="Id" OtherKey="Destination" Type="Bilet" />
+      <Column Name="Way" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="City_Ticket" Member="City" ThisKey="Source" OtherKey="Id" Type="City" IsForeignKey="true" />
+      <Association Name="City_Ticket1" Member="City1" ThisKey="Destination" OtherKey="Id" Type="City" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
